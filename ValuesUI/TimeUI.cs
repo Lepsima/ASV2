@@ -14,9 +14,17 @@ public struct TimeUI : IAutoUnitUI {
         type = TimeUIType.Millisecond;
     }
     
-    public static implicit operator float(TimeUI v) => v.x;
-    public static implicit operator Time(TimeUI v) => new(v.x);
-    public Time magnitude => new(x);
+    public static implicit operator float(TimeUI v) => v.Value;
+    public static implicit operator Time(TimeUI v) {
+	    return v.type switch {
+	        TimeUIType.Millisecond => Time.Millisecond(v.x),
+	        TimeUIType.Second => Time.Second(v.x),
+	        TimeUIType.Minute => Time.Minute(v.x),
+	        TimeUIType.Hour => Time.Hour(v.x),
+
+		    _ => new Time(v.Value)
+	    };
+    }
 }
 
 

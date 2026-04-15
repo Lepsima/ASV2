@@ -14,9 +14,15 @@ public struct TorqueAccelUI : IAutoUnitUI {
         type = TorqueAccelUIType.NewtonsPerMetersPerSecond;
     }
     
-    public static implicit operator float(TorqueAccelUI v) => v.x;
-    public static implicit operator TorqueAccel(TorqueAccelUI v) => new(v.x);
-    public TorqueAccel magnitude => new(x);
+    public static implicit operator float(TorqueAccelUI v) => v.Value;
+    public static implicit operator TorqueAccel(TorqueAccelUI v) {
+	    return v.type switch {
+	        TorqueAccelUIType.NewtonsPerMetersPerSecond => TorqueAccel.NewtonsPerMetersPerSecond(v.x),
+	        TorqueAccelUIType.KilonewtonsPerMetersPerSecond => TorqueAccel.KilonewtonsPerMetersPerSecond(v.x),
+
+		    _ => new TorqueAccel(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -38,9 +44,15 @@ public struct TorqueAccel2UI : IAutoUnitUI2 {
         type = TorqueAccelUIType.NewtonsPerMetersPerSecond;
     }
   
-    public static implicit operator Vector2(TorqueAccel2UI v) => new(v.x, v.y);
-    public static implicit operator TorqueAccel2(TorqueAccel2UI v) => new(v.x, v.y);
-    public TorqueAccel magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public static implicit operator Vector2(TorqueAccel2UI v) => v.Value;
+    public static implicit operator TorqueAccel2(TorqueAccel2UI v) {
+	    return v.type switch {
+	        TorqueAccelUIType.NewtonsPerMetersPerSecond => TorqueAccel2.NewtonsPerMetersPerSecond(v.x, v.y),
+	        TorqueAccelUIType.KilonewtonsPerMetersPerSecond => TorqueAccel2.KilonewtonsPerMetersPerSecond(v.x, v.y),
+
+		    _ => new TorqueAccel2(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -64,15 +76,21 @@ public struct TorqueAccel3UI : IAutoUnitUI3 {
         type = TorqueAccelUIType.NewtonsPerMetersPerSecond;
     }
 
-    public static implicit operator Vector3(TorqueAccel3UI v) => new(v.x, v.y, v.z);
-    public static implicit operator TorqueAccel3(TorqueAccel3UI v) => new(v.x, v.y, v.z);
-    public TorqueAccel magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public static implicit operator Vector3(TorqueAccel3UI v) => v.Value;
+    public static implicit operator TorqueAccel3(TorqueAccel3UI v) {
+	    return v.type switch {
+	        TorqueAccelUIType.NewtonsPerMetersPerSecond => TorqueAccel3.NewtonsPerMetersPerSecond(v.x, v.y, v.z),
+	        TorqueAccelUIType.KilonewtonsPerMetersPerSecond => TorqueAccel3.KilonewtonsPerMetersPerSecond(v.x, v.y, v.z),
+
+		    _ => new TorqueAccel3(v.Value)
+	    };
+    }
 }
 
 public enum TorqueAccelUIType {
-    [InspectorName("N*m/s")]
+    [InspectorName("N*m╱s")]
     NewtonsPerMetersPerSecond,
-    [InspectorName("kN*m/s")]
+    [InspectorName("kN*m╱s")]
     KilonewtonsPerMetersPerSecond,
 
 }

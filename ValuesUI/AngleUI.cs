@@ -14,9 +14,15 @@ public struct AngleUI : IAutoUnitUI {
         type = AngleUIType.Degree;
     }
     
-    public static implicit operator float(AngleUI v) => v.x;
-    public static implicit operator Angle(AngleUI v) => new(v.x);
-    public Angle magnitude => new(x);
+    public static implicit operator float(AngleUI v) => v.Value;
+    public static implicit operator Angle(AngleUI v) {
+	    return v.type switch {
+	        AngleUIType.Degree => Angle.Degree(v.x),
+	        AngleUIType.Radian => Angle.Radian(v.x),
+
+		    _ => new Angle(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -38,9 +44,15 @@ public struct Angle2UI : IAutoUnitUI2 {
         type = AngleUIType.Degree;
     }
   
-    public static implicit operator Vector2(Angle2UI v) => new(v.x, v.y);
-    public static implicit operator Angle2(Angle2UI v) => new(v.x, v.y);
-    public Angle magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public static implicit operator Vector2(Angle2UI v) => v.Value;
+    public static implicit operator Angle2(Angle2UI v) {
+	    return v.type switch {
+	        AngleUIType.Degree => Angle2.Degree(v.x, v.y),
+	        AngleUIType.Radian => Angle2.Radian(v.x, v.y),
+
+		    _ => new Angle2(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -64,9 +76,15 @@ public struct Angle3UI : IAutoUnitUI3 {
         type = AngleUIType.Degree;
     }
 
-    public static implicit operator Vector3(Angle3UI v) => new(v.x, v.y, v.z);
-    public static implicit operator Angle3(Angle3UI v) => new(v.x, v.y, v.z);
-    public Angle magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public static implicit operator Vector3(Angle3UI v) => v.Value;
+    public static implicit operator Angle3(Angle3UI v) {
+	    return v.type switch {
+	        AngleUIType.Degree => Angle3.Degree(v.x, v.y, v.z),
+	        AngleUIType.Radian => Angle3.Radian(v.x, v.y, v.z),
+
+		    _ => new Angle3(v.Value)
+	    };
+    }
 }
 
 public enum AngleUIType {

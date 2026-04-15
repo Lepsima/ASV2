@@ -14,9 +14,17 @@ public struct AngleAccelUI : IAutoUnitUI {
         type = AngleAccelUIType.DegreesPerSecond2;
     }
     
-    public static implicit operator float(AngleAccelUI v) => v.x;
-    public static implicit operator AngleAccel(AngleAccelUI v) => new(v.x);
-    public AngleAccel magnitude => new(x);
+    public static implicit operator float(AngleAccelUI v) => v.Value;
+    public static implicit operator AngleAccel(AngleAccelUI v) {
+	    return v.type switch {
+	        AngleAccelUIType.DegreesPerSecond2 => AngleAccel.DegreesPerSecond2(v.x),
+	        AngleAccelUIType.DegreesPerMinute2 => AngleAccel.DegreesPerMinute2(v.x),
+	        AngleAccelUIType.RadiansPerSecond2 => AngleAccel.RadiansPerSecond2(v.x),
+	        AngleAccelUIType.RadiansPerMinute2 => AngleAccel.RadiansPerMinute2(v.x),
+
+		    _ => new AngleAccel(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -38,9 +46,17 @@ public struct AngleAccel2UI : IAutoUnitUI2 {
         type = AngleAccelUIType.DegreesPerSecond2;
     }
   
-    public static implicit operator Vector2(AngleAccel2UI v) => new(v.x, v.y);
-    public static implicit operator AngleAccel2(AngleAccel2UI v) => new(v.x, v.y);
-    public AngleAccel magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public static implicit operator Vector2(AngleAccel2UI v) => v.Value;
+    public static implicit operator AngleAccel2(AngleAccel2UI v) {
+	    return v.type switch {
+	        AngleAccelUIType.DegreesPerSecond2 => AngleAccel2.DegreesPerSecond2(v.x, v.y),
+	        AngleAccelUIType.DegreesPerMinute2 => AngleAccel2.DegreesPerMinute2(v.x, v.y),
+	        AngleAccelUIType.RadiansPerSecond2 => AngleAccel2.RadiansPerSecond2(v.x, v.y),
+	        AngleAccelUIType.RadiansPerMinute2 => AngleAccel2.RadiansPerMinute2(v.x, v.y),
+
+		    _ => new AngleAccel2(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -64,19 +80,27 @@ public struct AngleAccel3UI : IAutoUnitUI3 {
         type = AngleAccelUIType.DegreesPerSecond2;
     }
 
-    public static implicit operator Vector3(AngleAccel3UI v) => new(v.x, v.y, v.z);
-    public static implicit operator AngleAccel3(AngleAccel3UI v) => new(v.x, v.y, v.z);
-    public AngleAccel magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public static implicit operator Vector3(AngleAccel3UI v) => v.Value;
+    public static implicit operator AngleAccel3(AngleAccel3UI v) {
+	    return v.type switch {
+	        AngleAccelUIType.DegreesPerSecond2 => AngleAccel3.DegreesPerSecond2(v.x, v.y, v.z),
+	        AngleAccelUIType.DegreesPerMinute2 => AngleAccel3.DegreesPerMinute2(v.x, v.y, v.z),
+	        AngleAccelUIType.RadiansPerSecond2 => AngleAccel3.RadiansPerSecond2(v.x, v.y, v.z),
+	        AngleAccelUIType.RadiansPerMinute2 => AngleAccel3.RadiansPerMinute2(v.x, v.y, v.z),
+
+		    _ => new AngleAccel3(v.Value)
+	    };
+    }
 }
 
 public enum AngleAccelUIType {
-    [InspectorName("deg/s2")]
+    [InspectorName("deg╱s2")]
     DegreesPerSecond2,
-    [InspectorName("deg/m2")]
+    [InspectorName("deg╱m2")]
     DegreesPerMinute2,
-    [InspectorName("rad/s2")]
+    [InspectorName("rad╱s2")]
     RadiansPerSecond2,
-    [InspectorName("rad/m2")]
+    [InspectorName("rad╱m2")]
     RadiansPerMinute2,
 
 }

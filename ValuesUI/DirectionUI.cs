@@ -21,9 +21,14 @@ public struct Direction2UI : IAutoUnitUI2 {
         type = DirectionUIType.Normal;
     }
   
-    public static implicit operator Vector2(Direction2UI v) => new(v.x, v.y);
-    public static implicit operator Direction2(Direction2UI v) => new(v.x, v.y);
-    public Magnitude magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public static implicit operator Vector2(Direction2UI v) => v.Value;
+    public static implicit operator Direction2(Direction2UI v) {
+	    return v.type switch {
+	        DirectionUIType.Normal => Direction2.Normal(v.x, v.y),
+
+		    _ => new Direction2(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -47,9 +52,14 @@ public struct Direction3UI : IAutoUnitUI3 {
         type = DirectionUIType.Normal;
     }
 
-    public static implicit operator Vector3(Direction3UI v) => new(v.x, v.y, v.z);
-    public static implicit operator Direction3(Direction3UI v) => new(v.x, v.y, v.z);
-    public Magnitude magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public static implicit operator Vector3(Direction3UI v) => v.Value;
+    public static implicit operator Direction3(Direction3UI v) {
+	    return v.type switch {
+	        DirectionUIType.Normal => Direction3.Normal(v.x, v.y, v.z),
+
+		    _ => new Direction3(v.Value)
+	    };
+    }
 }
 
 public enum DirectionUIType {

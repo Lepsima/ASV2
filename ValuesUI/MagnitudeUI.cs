@@ -14,9 +14,14 @@ public struct MagnitudeUI : IAutoUnitUI {
         type = MagnitudeUIType.ZeroToOne;
     }
     
-    public static implicit operator float(MagnitudeUI v) => v.x;
-    public static implicit operator Magnitude(MagnitudeUI v) => new(v.x);
-    public Magnitude magnitude => new(x);
+    public static implicit operator float(MagnitudeUI v) => v.Value;
+    public static implicit operator Magnitude(MagnitudeUI v) {
+	    return v.type switch {
+	        MagnitudeUIType.ZeroToOne => Magnitude.ZeroToOne(v.x),
+
+		    _ => new Magnitude(v.Value)
+	    };
+    }
 }
 
 

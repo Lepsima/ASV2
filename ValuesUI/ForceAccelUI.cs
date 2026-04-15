@@ -14,9 +14,15 @@ public struct ForceAccelUI : IAutoUnitUI {
         type = ForceAccelUIType.NewtonsPerSecond;
     }
     
-    public static implicit operator float(ForceAccelUI v) => v.x;
-    public static implicit operator ForceAccel(ForceAccelUI v) => new(v.x);
-    public ForceAccel magnitude => new(x);
+    public static implicit operator float(ForceAccelUI v) => v.Value;
+    public static implicit operator ForceAccel(ForceAccelUI v) {
+	    return v.type switch {
+	        ForceAccelUIType.NewtonsPerSecond => ForceAccel.NewtonsPerSecond(v.x),
+	        ForceAccelUIType.KilonewtonsPerSecond => ForceAccel.KilonewtonsPerSecond(v.x),
+
+		    _ => new ForceAccel(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -38,9 +44,15 @@ public struct ForceAccel2UI : IAutoUnitUI2 {
         type = ForceAccelUIType.NewtonsPerSecond;
     }
   
-    public static implicit operator Vector2(ForceAccel2UI v) => new(v.x, v.y);
-    public static implicit operator ForceAccel2(ForceAccel2UI v) => new(v.x, v.y);
-    public ForceAccel magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public static implicit operator Vector2(ForceAccel2UI v) => v.Value;
+    public static implicit operator ForceAccel2(ForceAccel2UI v) {
+	    return v.type switch {
+	        ForceAccelUIType.NewtonsPerSecond => ForceAccel2.NewtonsPerSecond(v.x, v.y),
+	        ForceAccelUIType.KilonewtonsPerSecond => ForceAccel2.KilonewtonsPerSecond(v.x, v.y),
+
+		    _ => new ForceAccel2(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -64,15 +76,21 @@ public struct ForceAccel3UI : IAutoUnitUI3 {
         type = ForceAccelUIType.NewtonsPerSecond;
     }
 
-    public static implicit operator Vector3(ForceAccel3UI v) => new(v.x, v.y, v.z);
-    public static implicit operator ForceAccel3(ForceAccel3UI v) => new(v.x, v.y, v.z);
-    public ForceAccel magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public static implicit operator Vector3(ForceAccel3UI v) => v.Value;
+    public static implicit operator ForceAccel3(ForceAccel3UI v) {
+	    return v.type switch {
+	        ForceAccelUIType.NewtonsPerSecond => ForceAccel3.NewtonsPerSecond(v.x, v.y, v.z),
+	        ForceAccelUIType.KilonewtonsPerSecond => ForceAccel3.KilonewtonsPerSecond(v.x, v.y, v.z),
+
+		    _ => new ForceAccel3(v.Value)
+	    };
+    }
 }
 
 public enum ForceAccelUIType {
-    [InspectorName("N/s")]
+    [InspectorName("N╱s")]
     NewtonsPerSecond,
-    [InspectorName("kN/s")]
+    [InspectorName("kN╱s")]
     KilonewtonsPerSecond,
 
 }

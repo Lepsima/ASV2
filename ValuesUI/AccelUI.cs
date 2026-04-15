@@ -14,9 +14,17 @@ public struct AccelUI : IAutoUnitUI {
         type = AccelUIType.MetersPerSecond2;
     }
     
-    public static implicit operator float(AccelUI v) => v.x;
-    public static implicit operator Accel(AccelUI v) => new(v.x);
-    public Accel magnitude => new(x);
+    public static implicit operator float(AccelUI v) => v.Value;
+    public static implicit operator Accel(AccelUI v) {
+	    return v.type switch {
+	        AccelUIType.MetersPerSecond2 => Accel.MetersPerSecond2(v.x),
+	        AccelUIType.KilometersPerHour2 => Accel.KilometersPerHour2(v.x),
+	        AccelUIType.FeetsPerSecond2 => Accel.FeetsPerSecond2(v.x),
+	        AccelUIType.MilesPerHour2 => Accel.MilesPerHour2(v.x),
+
+		    _ => new Accel(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -38,9 +46,17 @@ public struct Accel2UI : IAutoUnitUI2 {
         type = AccelUIType.MetersPerSecond2;
     }
   
-    public static implicit operator Vector2(Accel2UI v) => new(v.x, v.y);
-    public static implicit operator Accel2(Accel2UI v) => new(v.x, v.y);
-    public Accel magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public static implicit operator Vector2(Accel2UI v) => v.Value;
+    public static implicit operator Accel2(Accel2UI v) {
+	    return v.type switch {
+	        AccelUIType.MetersPerSecond2 => Accel2.MetersPerSecond2(v.x, v.y),
+	        AccelUIType.KilometersPerHour2 => Accel2.KilometersPerHour2(v.x, v.y),
+	        AccelUIType.FeetsPerSecond2 => Accel2.FeetsPerSecond2(v.x, v.y),
+	        AccelUIType.MilesPerHour2 => Accel2.MilesPerHour2(v.x, v.y),
+
+		    _ => new Accel2(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -64,19 +80,27 @@ public struct Accel3UI : IAutoUnitUI3 {
         type = AccelUIType.MetersPerSecond2;
     }
 
-    public static implicit operator Vector3(Accel3UI v) => new(v.x, v.y, v.z);
-    public static implicit operator Accel3(Accel3UI v) => new(v.x, v.y, v.z);
-    public Accel magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public static implicit operator Vector3(Accel3UI v) => v.Value;
+    public static implicit operator Accel3(Accel3UI v) {
+	    return v.type switch {
+	        AccelUIType.MetersPerSecond2 => Accel3.MetersPerSecond2(v.x, v.y, v.z),
+	        AccelUIType.KilometersPerHour2 => Accel3.KilometersPerHour2(v.x, v.y, v.z),
+	        AccelUIType.FeetsPerSecond2 => Accel3.FeetsPerSecond2(v.x, v.y, v.z),
+	        AccelUIType.MilesPerHour2 => Accel3.MilesPerHour2(v.x, v.y, v.z),
+
+		    _ => new Accel3(v.Value)
+	    };
+    }
 }
 
 public enum AccelUIType {
-    [InspectorName("m/s2")]
+    [InspectorName("m╱s2")]
     MetersPerSecond2,
-    [InspectorName("km/h2")]
+    [InspectorName("km╱h2")]
     KilometersPerHour2,
-    [InspectorName("ft/s2")]
+    [InspectorName("ft╱s2")]
     FeetsPerSecond2,
-    [InspectorName("mi/h2")]
+    [InspectorName("mi╱h2")]
     MilesPerHour2,
 
 }

@@ -14,9 +14,18 @@ public struct PositionUI : IAutoUnitUI {
         type = PositionUIType.Feet;
     }
     
-    public static implicit operator float(PositionUI v) => v.x;
-    public static implicit operator Position(PositionUI v) => new(v.x);
-    public Position magnitude => new(x);
+    public static implicit operator float(PositionUI v) => v.Value;
+    public static implicit operator Position(PositionUI v) {
+	    return v.type switch {
+	        PositionUIType.Feet => Position.Feet(v.x),
+	        PositionUIType.Mile => Position.Mile(v.x),
+	        PositionUIType.Centimeter => Position.Centimeter(v.x),
+	        PositionUIType.Meter => Position.Meter(v.x),
+	        PositionUIType.Kilometer => Position.Kilometer(v.x),
+
+		    _ => new Position(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -38,9 +47,18 @@ public struct Position2UI : IAutoUnitUI2 {
         type = PositionUIType.Feet;
     }
   
-    public static implicit operator Vector2(Position2UI v) => new(v.x, v.y);
-    public static implicit operator Position2(Position2UI v) => new(v.x, v.y);
-    public Position magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public static implicit operator Vector2(Position2UI v) => v.Value;
+    public static implicit operator Position2(Position2UI v) {
+	    return v.type switch {
+	        PositionUIType.Feet => Position2.Feet(v.x, v.y),
+	        PositionUIType.Mile => Position2.Mile(v.x, v.y),
+	        PositionUIType.Centimeter => Position2.Centimeter(v.x, v.y),
+	        PositionUIType.Meter => Position2.Meter(v.x, v.y),
+	        PositionUIType.Kilometer => Position2.Kilometer(v.x, v.y),
+
+		    _ => new Position2(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -64,9 +82,18 @@ public struct Position3UI : IAutoUnitUI3 {
         type = PositionUIType.Feet;
     }
 
-    public static implicit operator Vector3(Position3UI v) => new(v.x, v.y, v.z);
-    public static implicit operator Position3(Position3UI v) => new(v.x, v.y, v.z);
-    public Position magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public static implicit operator Vector3(Position3UI v) => v.Value;
+    public static implicit operator Position3(Position3UI v) {
+	    return v.type switch {
+	        PositionUIType.Feet => Position3.Feet(v.x, v.y, v.z),
+	        PositionUIType.Mile => Position3.Mile(v.x, v.y, v.z),
+	        PositionUIType.Centimeter => Position3.Centimeter(v.x, v.y, v.z),
+	        PositionUIType.Meter => Position3.Meter(v.x, v.y, v.z),
+	        PositionUIType.Kilometer => Position3.Kilometer(v.x, v.y, v.z),
+
+		    _ => new Position3(v.Value)
+	    };
+    }
 }
 
 public enum PositionUIType {
@@ -80,5 +107,6 @@ public enum PositionUIType {
     Meter,
     [InspectorName("km")]
     Kilometer,
+
 }
 }

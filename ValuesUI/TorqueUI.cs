@@ -14,9 +14,15 @@ public struct TorqueUI : IAutoUnitUI {
         type = TorqueUIType.NewtonsPerMeter;
     }
     
-    public static implicit operator float(TorqueUI v) => v.x;
-    public static implicit operator Torque(TorqueUI v) => new(v.x);
-    public Torque magnitude => new(x);
+    public static implicit operator float(TorqueUI v) => v.Value;
+    public static implicit operator Torque(TorqueUI v) {
+	    return v.type switch {
+	        TorqueUIType.NewtonsPerMeter => Torque.NewtonsPerMeter(v.x),
+	        TorqueUIType.KilonewtonsPerMeter => Torque.KilonewtonsPerMeter(v.x),
+
+		    _ => new Torque(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -38,9 +44,15 @@ public struct Torque2UI : IAutoUnitUI2 {
         type = TorqueUIType.NewtonsPerMeter;
     }
   
-    public static implicit operator Vector2(Torque2UI v) => new(v.x, v.y);
-    public static implicit operator Torque2(Torque2UI v) => new(v.x, v.y);
-    public Torque magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public static implicit operator Vector2(Torque2UI v) => v.Value;
+    public static implicit operator Torque2(Torque2UI v) {
+	    return v.type switch {
+	        TorqueUIType.NewtonsPerMeter => Torque2.NewtonsPerMeter(v.x, v.y),
+	        TorqueUIType.KilonewtonsPerMeter => Torque2.KilonewtonsPerMeter(v.x, v.y),
+
+		    _ => new Torque2(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -64,9 +76,15 @@ public struct Torque3UI : IAutoUnitUI3 {
         type = TorqueUIType.NewtonsPerMeter;
     }
 
-    public static implicit operator Vector3(Torque3UI v) => new(v.x, v.y, v.z);
-    public static implicit operator Torque3(Torque3UI v) => new(v.x, v.y, v.z);
-    public Torque magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public static implicit operator Vector3(Torque3UI v) => v.Value;
+    public static implicit operator Torque3(Torque3UI v) {
+	    return v.type switch {
+	        TorqueUIType.NewtonsPerMeter => Torque3.NewtonsPerMeter(v.x, v.y, v.z),
+	        TorqueUIType.KilonewtonsPerMeter => Torque3.KilonewtonsPerMeter(v.x, v.y, v.z),
+
+		    _ => new Torque3(v.Value)
+	    };
+    }
 }
 
 public enum TorqueUIType {

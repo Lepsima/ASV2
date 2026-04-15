@@ -14,9 +14,16 @@ public struct MassUI : IAutoUnitUI {
         type = MassUIType.Gram;
     }
     
-    public static implicit operator float(MassUI v) => v.x;
-    public static implicit operator Mass(MassUI v) => new(v.x);
-    public Mass magnitude => new(x);
+    public static implicit operator float(MassUI v) => v.Value;
+    public static implicit operator Mass(MassUI v) {
+	    return v.type switch {
+	        MassUIType.Gram => Mass.Gram(v.x),
+	        MassUIType.Kilogram => Mass.Kilogram(v.x),
+	        MassUIType.Ton => Mass.Ton(v.x),
+
+		    _ => new Mass(v.Value)
+	    };
+    }
 }
 
 

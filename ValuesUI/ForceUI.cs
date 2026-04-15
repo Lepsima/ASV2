@@ -14,9 +14,16 @@ public struct ForceUI : IAutoUnitUI {
         type = ForceUIType.Newton;
     }
     
-    public static implicit operator float(ForceUI v) => v.x;
-    public static implicit operator Force(ForceUI v) => new(v.x);
-    public Force magnitude => new(x);
+    public static implicit operator float(ForceUI v) => v.Value;
+    public static implicit operator Force(ForceUI v) {
+	    return v.type switch {
+	        ForceUIType.Newton => Force.Newton(v.x),
+	        ForceUIType.Kilonewton => Force.Kilonewton(v.x),
+	        ForceUIType.Meganewton => Force.Meganewton(v.x),
+
+		    _ => new Force(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -38,9 +45,16 @@ public struct Force2UI : IAutoUnitUI2 {
         type = ForceUIType.Newton;
     }
   
-    public static implicit operator Vector2(Force2UI v) => new(v.x, v.y);
-    public static implicit operator Force2(Force2UI v) => new(v.x, v.y);
-    public Force magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public static implicit operator Vector2(Force2UI v) => v.Value;
+    public static implicit operator Force2(Force2UI v) {
+	    return v.type switch {
+	        ForceUIType.Newton => Force2.Newton(v.x, v.y),
+	        ForceUIType.Kilonewton => Force2.Kilonewton(v.x, v.y),
+	        ForceUIType.Meganewton => Force2.Meganewton(v.x, v.y),
+
+		    _ => new Force2(v.Value)
+	    };
+    }
 }
 
 [System.Serializable]
@@ -64,9 +78,16 @@ public struct Force3UI : IAutoUnitUI3 {
         type = ForceUIType.Newton;
     }
 
-    public static implicit operator Vector3(Force3UI v) => new(v.x, v.y, v.z);
-    public static implicit operator Force3(Force3UI v) => new(v.x, v.y, v.z);
-    public Force magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public static implicit operator Vector3(Force3UI v) => v.Value;
+    public static implicit operator Force3(Force3UI v) {
+	    return v.type switch {
+	        ForceUIType.Newton => Force3.Newton(v.x, v.y, v.z),
+	        ForceUIType.Kilonewton => Force3.Kilonewton(v.x, v.y, v.z),
+	        ForceUIType.Meganewton => Force3.Meganewton(v.x, v.y, v.z),
+
+		    _ => new Force3(v.Value)
+	    };
+    }
 }
 
 public enum ForceUIType {
