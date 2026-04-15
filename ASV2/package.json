@@ -1,7 +1,7 @@
 {
   "name": "lepsima.asv2",
   "displayName": "ASV2",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "hideInEditor": false,
   "description": "Auto Scale Variables 2",
   "unity": "6000.0",
