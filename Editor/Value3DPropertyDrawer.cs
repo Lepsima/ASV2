@@ -8,7 +8,7 @@ public class Value3DPropertyDrawer : PropertyDrawer {
 
 	public override VisualElement CreatePropertyGUI(SerializedProperty property) {
 		VisualElement container = new();
-		PropertyField nameField = new(property.FindPropertyRelative("_value"), property.displayName);
+		PropertyField nameField = new(property.FindPropertyRelative("x"), property.displayName);
 		container.Add(nameField);
 		return container;
 	}

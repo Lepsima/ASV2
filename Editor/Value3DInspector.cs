@@ -35,13 +35,17 @@ public class Value3DInspector : PropertyDrawer {
 	}
 
 	private static void Vector3Property(Rect rect, SerializedProperty property) {
-		SerializedProperty valueProp = property.FindPropertyRelative("_value");
-		Vector3 v = valueProp.vector3Value;
-		float[] values = { v.x, v.y, v.z };
+		SerializedProperty valueProp1 = property.FindPropertyRelative("x");
+		SerializedProperty valueProp2 = property.FindPropertyRelative("y");
+		SerializedProperty valueProp3 = property.FindPropertyRelative("z");
+		float[] values = { valueProp1.floatValue, valueProp2.floatValue, valueProp3.floatValue };
 
 		GUIContent[] labels = { GUIContent.none, GUIContent.none, GUIContent.none };
 		EditorGUI.MultiFloatField(rect, GUIContent.none, labels, values);
-		valueProp.vector3Value = new Vector3(values[0], values[1], values[2]);
+		
+		valueProp1.floatValue = values[0];
+		valueProp2.floatValue = values[1];
+		valueProp3.floatValue = values[2];
 	}
 
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {

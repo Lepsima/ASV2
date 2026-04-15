@@ -35,7 +35,7 @@ public class Value1DInspector : PropertyDrawer {
 	}
 
 	private static void FloatProperty(Rect rect, SerializedProperty property) {
-		SerializedProperty prop = property.FindPropertyRelative("_value");
+		SerializedProperty prop = property.FindPropertyRelative("x");
 		EditorGUI.PropertyField(rect, prop, GUIContent.none);
 	}
 

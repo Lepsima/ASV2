@@ -80,6 +80,5 @@ public enum PositionUIType {
     Meter,
     [InspectorName("km")]
     Kilometer,
-
 }
 }

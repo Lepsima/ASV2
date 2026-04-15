@@ -36,7 +36,7 @@ public class Value2DInspector : PropertyDrawer {
 
 	private static void Vector2Property(Rect rect, SerializedProperty property) {
 		SerializedProperty valueProp1 = property.FindPropertyRelative("x");
-		SerializedProperty valueProp2 = property.FindPropertyRelative("x");
+		SerializedProperty valueProp2 = property.FindPropertyRelative("y");
 		float[] values = { valueProp1.floatValue, valueProp2.floatValue };
 
 		GUIContent[] labels = { GUIContent.none, GUIContent.none, GUIContent.none };
