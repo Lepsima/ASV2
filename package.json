@@ -1,0 +1,15 @@
+{
+  "name": "lepsima.autovariables",
+  "displayName": "Auto Variables",
+  "version": "1.2.1",
+  "hideInEditor": false,
+  "description": "Description",
+  "unity": "6000.0",
+  "author": {
+    "email": "lepsima@proton.me",
+    "name": "Lepsima",
+    "url": "https://github.com/Lepsima"
+  },
+  "changelogUrl": "https://github.com/Lepsima/Auto-Scale-Variables/releases",
+  "documentationUrl": "https://github.com/Lepsima/Auto-Scale-Variables"
+}
