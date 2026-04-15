@@ -1,15 +1,15 @@
 {
-  "name": "lepsima.autovariables",
-  "displayName": "Auto Variables",
-  "version": "1.2.1",
+  "name": "lepsima.asv2",
+  "displayName": "ASV2",
+  "version": "1.0.0",
   "hideInEditor": false,
-  "description": "Description",
+  "description": "Auto Scale Variables 2",
   "unity": "6000.0",
   "author": {
     "email": "lepsima@proton.me",
     "name": "Lepsima",
     "url": "https://github.com/Lepsima"
   },
-  "changelogUrl": "https://github.com/Lepsima/Auto-Scale-Variables/releases",
-  "documentationUrl": "https://github.com/Lepsima/Auto-Scale-Variables"
+  "changelogUrl": "https://github.com/Lepsima/AVS2/releases",
+  "documentationUrl": "https://github.com/Lepsima/AVS2"
 }
