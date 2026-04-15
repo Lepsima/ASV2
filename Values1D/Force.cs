@@ -12,7 +12,6 @@ public struct Force : IAutoUnit {
     public float vector => x;
     
     public static implicit operator float(Force v) => v.x;
-    public Force magnitude => new(x);
 
     public float ToMillinewton() => x * 1000f;
     public static Force Millinewton(float x) => new(x * 0.001f);

@@ -12,7 +12,6 @@ public struct Torque : IAutoUnit {
     public float vector => x;
     
     public static implicit operator float(Torque v) => v.x;
-    public Torque magnitude => new(x);
 
     public float ToMillinewton() => x * 1000f;
     public static Torque Millinewton(float x) => new(x * 0.001f);

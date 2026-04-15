@@ -12,7 +12,6 @@ public struct Velocity : IAutoUnit {
     public float vector => x;
     
     public static implicit operator float(Velocity v) => v.x;
-    public Velocity magnitude => new(x);
 
     public float ToFeetsPerMicrosecond() => x * 3.048E-07f;
     public static Velocity FeetsPerMicrosecond(float x) => new(x * 3280839.895f);

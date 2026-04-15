@@ -18,9 +18,11 @@ public struct Force3 : IAutoUnit3 {
     }
     
     public Vector3 vector => this;
+    public static implicit operator Vector3(Force3 v) => new(v.x, v.y, v.z);
     
-    public static implicit operator Vector3(Force3 v) => new Vector3(v.x, v.y, v.z);
-    public Force magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public Direction3 normalized => new(vector.normalized);
+    public Force sqrMagnitude => new(vector.sqrMagnitude);
+    public Force magnitude => new(vector.magnitude);
 
     public Vector3 ToMillinewton() => new(x * 1000f, y * 1000f, z * 1000f);
     public static Force3 Millinewton(float x, float y, float z) => new(x * 0.001f, y * 0.001f, z * 0.001f);

@@ -16,9 +16,11 @@ public struct Torque2 : IAutoUnit2 {
     }
 
     public Vector2 vector => this;
+    public static implicit operator Vector2(Torque2 v) => new(v.x, v.y);
 
-    public static implicit operator Vector2(Torque2 v) => new Vector2(v.x, v.y);
-    public Torque magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public Direction3 normalized => new(vector.normalized);
+    public Torque sqrMagnitude => new(vector.sqrMagnitude);
+    public Torque magnitude => new(vector.magnitude);
 
     public Vector2 ToMillinewton() => new(x * 1000f, y * 1000f);
     public static Torque2 Millinewton(float x, float y) => new(x * 0.001f, y * 0.001f);

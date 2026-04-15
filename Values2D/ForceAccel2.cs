@@ -16,9 +16,11 @@ public struct ForceAccel2 : IAutoUnit2 {
     }
 
     public Vector2 vector => this;
+    public static implicit operator Vector2(ForceAccel2 v) => new(v.x, v.y);
 
-    public static implicit operator Vector2(ForceAccel2 v) => new Vector2(v.x, v.y);
-    public ForceAccel magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public Direction3 normalized => new(vector.normalized);
+    public ForceAccel sqrMagnitude => new(vector.sqrMagnitude);
+    public ForceAccel magnitude => new(vector.magnitude);
 
     public Vector2 ToMillinewtonsPerMicrosecond() => new(x * 0.001f, y * 0.001f);
     public static ForceAccel2 MillinewtonsPerMicrosecond(float x, float y) => new(x * 1000f, y * 1000f);

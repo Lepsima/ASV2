@@ -12,7 +12,6 @@ public struct Magnitude : IAutoUnit {
     public float vector => x;
     
     public static implicit operator float(Magnitude v) => v.x;
-    public Magnitude magnitude => new(x);
 
     public static Time operator *(Time left, Magnitude right) => new(left.vector * right.vector);
     public static Time operator *(Magnitude left, Time right) => new(left.vector * right.vector);

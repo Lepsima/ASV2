@@ -18,9 +18,11 @@ public struct Accel3 : IAutoUnit3 {
     }
     
     public Vector3 vector => this;
+    public static implicit operator Vector3(Accel3 v) => new(v.x, v.y, v.z);
     
-    public static implicit operator Vector3(Accel3 v) => new Vector3(v.x, v.y, v.z);
-    public Accel magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public Direction3 normalized => new(vector.normalized);
+    public Accel sqrMagnitude => new(vector.sqrMagnitude);
+    public Accel magnitude => new(vector.magnitude);
 
     public Vector3 ToFeetsPerMicrosecond2() => new(x * 3.048E-13f, y * 3.048E-13f, z * 3.048E-13f);
     public static Accel3 FeetsPerMicrosecond2(float x, float y, float z) => new(x * 3.280839895E+12f, y * 3.280839895E+12f, z * 3.280839895E+12f);

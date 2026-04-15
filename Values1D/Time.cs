@@ -12,7 +12,6 @@ public struct Time : IAutoUnit {
     public float vector => x;
     
     public static implicit operator float(Time v) => v.x;
-    public Time magnitude => new(x);
 
     public float ToMicrosecond() => x * 1000000f;
     public static Time Microsecond(float x) => new(x * 1E-06f);

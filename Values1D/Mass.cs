@@ -12,7 +12,6 @@ public struct Mass : IAutoUnit {
     public float vector => x;
     
     public static implicit operator float(Mass v) => v.x;
-    public Mass magnitude => new(x);
 
     public float ToMilligram() => x * 1000000f;
     public static Mass Milligram(float x) => new(x * 1E-06f);

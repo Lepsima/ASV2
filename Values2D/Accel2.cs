@@ -16,9 +16,11 @@ public struct Accel2 : IAutoUnit2 {
     }
 
     public Vector2 vector => this;
+    public static implicit operator Vector2(Accel2 v) => new(v.x, v.y);
 
-    public static implicit operator Vector2(Accel2 v) => new Vector2(v.x, v.y);
-    public Accel magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public Direction3 normalized => new(vector.normalized);
+    public Accel sqrMagnitude => new(vector.sqrMagnitude);
+    public Accel magnitude => new(vector.magnitude);
 
     public Vector2 ToFeetsPerMicrosecond2() => new(x * 3.048E-13f, y * 3.048E-13f);
     public static Accel2 FeetsPerMicrosecond2(float x, float y) => new(x * 3.280839895E+12f, y * 3.280839895E+12f);

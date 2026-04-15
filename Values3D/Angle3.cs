@@ -18,9 +18,11 @@ public struct Angle3 : IAutoUnit3 {
     }
     
     public Vector3 vector => this;
+    public static implicit operator Vector3(Angle3 v) => new(v.x, v.y, v.z);
     
-    public static implicit operator Vector3(Angle3 v) => new Vector3(v.x, v.y, v.z);
-    public Angle magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public Direction3 normalized => new(vector.normalized);
+    public Angle sqrMagnitude => new(vector.sqrMagnitude);
+    public Angle magnitude => new(vector.magnitude);
 
     public Vector3 ToDegree() => new(x * 1f, y * 1f, z * 1f);
     public static Angle3 Degree(float x, float y, float z) => new(x * 1f, y * 1f, z * 1f);

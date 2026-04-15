@@ -16,9 +16,11 @@ public struct Velocity2 : IAutoUnit2 {
     }
 
     public Vector2 vector => this;
+    public static implicit operator Vector2(Velocity2 v) => new(v.x, v.y);
 
-    public static implicit operator Vector2(Velocity2 v) => new Vector2(v.x, v.y);
-    public Velocity magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public Direction3 normalized => new(vector.normalized);
+    public Velocity sqrMagnitude => new(vector.sqrMagnitude);
+    public Velocity magnitude => new(vector.magnitude);
 
     public Vector2 ToFeetsPerMicrosecond() => new(x * 3.048E-07f, y * 3.048E-07f);
     public static Velocity2 FeetsPerMicrosecond(float x, float y) => new(x * 3280839.895f, y * 3280839.895f);

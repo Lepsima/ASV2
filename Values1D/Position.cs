@@ -12,7 +12,6 @@ public struct Position : IAutoUnit {
     public float vector => x;
     
     public static implicit operator float(Position v) => v.x;
-    public Position magnitude => new(x);
 
     public float ToFeet() => x * 0.3048f;
     public static Position Feet(float x) => new(x * 3.280839895f);

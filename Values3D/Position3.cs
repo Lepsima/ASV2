@@ -18,9 +18,11 @@ public struct Position3 : IAutoUnit3 {
     }
     
     public Vector3 vector => this;
+    public static implicit operator Vector3(Position3 v) => new(v.x, v.y, v.z);
     
-    public static implicit operator Vector3(Position3 v) => new Vector3(v.x, v.y, v.z);
-    public Position magnitude => new((float)Math.Sqrt((double)x*x + (double)y*y + (double)z*z));
+    public Direction3 normalized => new(vector.normalized);
+    public Position sqrMagnitude => new(vector.sqrMagnitude);
+    public Position magnitude => new(vector.magnitude);
 
     public Vector3 ToFeet() => new(x * 0.3048f, y * 0.3048f, z * 0.3048f);
     public static Position3 Feet(float x, float y, float z) => new(x * 3.280839895f, y * 3.280839895f, z * 3.280839895f);

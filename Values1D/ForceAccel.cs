@@ -12,7 +12,6 @@ public struct ForceAccel : IAutoUnit {
     public float vector => x;
     
     public static implicit operator float(ForceAccel v) => v.x;
-    public ForceAccel magnitude => new(x);
 
     public float ToMillinewtonsPerMicrosecond() => x * 0.001f;
     public static ForceAccel MillinewtonsPerMicrosecond(float x) => new(x * 1000f);

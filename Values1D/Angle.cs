@@ -12,7 +12,6 @@ public struct Angle : IAutoUnit {
     public float vector => x;
     
     public static implicit operator float(Angle v) => v.x;
-    public Angle magnitude => new(x);
 
     public float ToDegree() => x * 1f;
     public static Angle Degree(float x) => new(x * 1f);

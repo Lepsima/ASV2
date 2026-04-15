@@ -16,9 +16,11 @@ public struct Position2 : IAutoUnit2 {
     }
 
     public Vector2 vector => this;
+    public static implicit operator Vector2(Position2 v) => new(v.x, v.y);
 
-    public static implicit operator Vector2(Position2 v) => new Vector2(v.x, v.y);
-    public Position magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public Direction3 normalized => new(vector.normalized);
+    public Position sqrMagnitude => new(vector.sqrMagnitude);
+    public Position magnitude => new(vector.magnitude);
 
     public Vector2 ToFeet() => new(x * 0.3048f, y * 0.3048f);
     public static Position2 Feet(float x, float y) => new(x * 3.280839895f, y * 3.280839895f);

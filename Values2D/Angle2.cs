@@ -16,9 +16,11 @@ public struct Angle2 : IAutoUnit2 {
     }
 
     public Vector2 vector => this;
+    public static implicit operator Vector2(Angle2 v) => new(v.x, v.y);
 
-    public static implicit operator Vector2(Angle2 v) => new Vector2(v.x, v.y);
-    public Angle magnitude => new((float)Math.Sqrt((double)x * x + (double)y * y));
+    public Direction3 normalized => new(vector.normalized);
+    public Angle sqrMagnitude => new(vector.sqrMagnitude);
+    public Angle magnitude => new(vector.magnitude);
 
     public Vector2 ToDegree() => new(x * 1f, y * 1f);
     public static Angle2 Degree(float x, float y) => new(x * 1f, y * 1f);

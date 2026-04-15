@@ -12,7 +12,6 @@ public struct AngleAccel : IAutoUnit {
     public float vector => x;
     
     public static implicit operator float(AngleAccel v) => v.x;
-    public AngleAccel magnitude => new(x);
 
     public float ToDegreesPerMicrosecond2() => x * 1E-12f;
     public static AngleAccel DegreesPerMicrosecond2(float x) => new(x * 1E+12f);
