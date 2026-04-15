@@ -18,7 +18,7 @@ public struct Angle2 : IAutoUnit2 {
     public Vector2 vector => this;
     public static implicit operator Vector2(Angle2 v) => new(v.x, v.y);
 
-    public Direction3 normalized => new(vector.normalized);
+    public Direction2 normalized => new(vector.normalized);
     public Angle sqrMagnitude => new(vector.sqrMagnitude);
     public Angle magnitude => new(vector.magnitude);
 

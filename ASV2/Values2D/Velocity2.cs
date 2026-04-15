@@ -18,7 +18,7 @@ public struct Velocity2 : IAutoUnit2 {
     public Vector2 vector => this;
     public static implicit operator Vector2(Velocity2 v) => new(v.x, v.y);
 
-    public Direction3 normalized => new(vector.normalized);
+    public Direction2 normalized => new(vector.normalized);
     public Velocity sqrMagnitude => new(vector.sqrMagnitude);
     public Velocity magnitude => new(vector.magnitude);
 

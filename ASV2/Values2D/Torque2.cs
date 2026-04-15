@@ -18,7 +18,7 @@ public struct Torque2 : IAutoUnit2 {
     public Vector2 vector => this;
     public static implicit operator Vector2(Torque2 v) => new(v.x, v.y);
 
-    public Direction3 normalized => new(vector.normalized);
+    public Direction2 normalized => new(vector.normalized);
     public Torque sqrMagnitude => new(vector.sqrMagnitude);
     public Torque magnitude => new(vector.magnitude);
 

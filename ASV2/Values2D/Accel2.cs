@@ -18,7 +18,7 @@ public struct Accel2 : IAutoUnit2 {
     public Vector2 vector => this;
     public static implicit operator Vector2(Accel2 v) => new(v.x, v.y);
 
-    public Direction3 normalized => new(vector.normalized);
+    public Direction2 normalized => new(vector.normalized);
     public Accel sqrMagnitude => new(vector.sqrMagnitude);
     public Accel magnitude => new(vector.magnitude);
 
